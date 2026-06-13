@@ -279,7 +279,7 @@ export default function CategoryPage({ category, promises, footerCols, onAddToCa
               </span>
               <div className="catSortWrap">
                 <label className="catSortLabel">{t.filters.sort}:</label>
-                <select className="catSortSelect" value={sort} onChange={e => setSort(e.target.value)}>
+                <select className="catSortSelect" value={sort}  onChange={e => setSort(e.target.value)}>
                   {SORT_OPTIONS.map(opt => (
                     <option key={opt} value={opt}>{t.filters.sortOptions[opt]}</option>
                   ))}

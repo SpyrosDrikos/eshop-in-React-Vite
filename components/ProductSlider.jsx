@@ -83,11 +83,11 @@ export default function ProductSlider({ clothes, shoes, onAddToCart }) {
                   {item.price && (
                     <span className="slidePrice">€{item.price.toFixed(2)}</span>
                   )}
-                  <span className="slidePrice">${item.price}</span>
+                  {/* <span className="slidePrice">${item.price}</span> */}
                   
                   <div className="colorSelector">
                     <label>Color:</label>
-                    <div className="colorOptions">
+                    <div className="colorOptions"> 
                       {item.colors.map(color => (
                         <button
                           key={color}

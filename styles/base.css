@@ -399,12 +399,13 @@ main {
 /* ─── SEARCH DROPDOWN ─────────────────────────────────────────────────────────── */
 .searchWrap {
   position: relative;
+  
 }
 
 .searchDrop {
   position: absolute;
   top: calc(100% + 30px);
-  left: -320px;
+  left: -93px;
   width: 380px;
   background: #fff;
   box-shadow: 4px 4px 12px rgba(0,0,0,0.4);

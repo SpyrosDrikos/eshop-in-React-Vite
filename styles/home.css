@@ -142,7 +142,6 @@
   padding: 12px 0;
   letter-spacing: 1px;
   background-color: rgba(104, 20, 14, 0.9);
-  text-shadow: 2px 2px 12px rgb(170, 170, 170);
 }
 
 .catGrid {
@@ -338,7 +337,6 @@
   padding: 6px 10px;
   font-size: 11px;
   border: 1px solid #ddd;
-  background: #fff;
   cursor: pointer;
   transition: all 0.2s;
   border-radius: 3px;

@@ -173,7 +173,6 @@
 .sizeBtn {
   padding: 4px 10px;
   border: 1px solid var(--border);
-  background: none;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
@@ -231,6 +230,8 @@
   outline: none;
   cursor: pointer;
   background: #fff;
+  color: var(--dark);
+  cursor: pointer;
 }
 
 /* ─── ACTIVE FILTER TAGS ──────────────────────────────────────────────────────── */

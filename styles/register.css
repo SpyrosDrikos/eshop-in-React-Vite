@@ -1,6 +1,8 @@
 /* ─── REGISTER/ACCOUNT PAGE ──────────────────────────────────────────────────── */
 .regContainer {
   display: flex;
+  justify-content: center;
+  align-items: center;
   min-height: 460px;
   max-width: 900px;
   margin: 60px auto;
@@ -63,7 +65,7 @@
 
 .regSubmit {
   width: 100%;
-  background: var(--dark);
+  background: var(--red);
   color: #fff;
   border: none;
   padding: 12px;
@@ -71,10 +73,11 @@
   font-weight: 700;
   letter-spacing: 2px;
   margin-top: 20px;
+  opacity: 0.8;
+  transition: all 0.2s;
 }
-
 .regSubmit:hover {
-  background: var(--red);
+  opacity: 1;
 }
 
 .regPrivacy {
@@ -89,13 +92,14 @@
 }
 
 .regSide {
-  flex: 0 0 280px;
   background: var(--dark);
   color: #fff;
-  padding: 40px 32px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 40px 50px;
+  width: 380px;
+  height: fit-content;
 }
 
 .regSide h1 {
@@ -119,7 +123,8 @@
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 2px;
-  align-self: flex-start;
+  width: fit-content;
+  margin: 0 auto;
 }
 
 .regToggleBtn:hover {
