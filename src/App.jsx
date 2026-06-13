@@ -9,6 +9,7 @@ import TopButton from "../components/TopButton.jsx";
 import HomePage from "../pages/HomePage.jsx";
 import RegisterPage from "../pages/RegisterPage.jsx";
 import CartPage from "../pages/CartPage.jsx";
+import WishlistPage from "../pages/WishlistPage.jsx";
 import CategoryPage from "../pages/CategoryPage.jsx";
 import ProductDetailPage from "../pages/ProductDetailPage.jsx";
  
@@ -45,6 +46,7 @@ export default function App() {
 function AppInner() {
   const [page, setPage] = useState("home");
   const [cartItems, setCartItems] = useState([]);
+  const [wishlistItems, setWishlistItems] = useState([]);
  
   const handleAddToCart = (product) => {
     setCartItems(prev => {
@@ -57,8 +59,19 @@ function AppInner() {
       return [...prev, { ...product, qty: 1 }];
     });
   };
+
+  const handleToggleWishlist = (product) => {
+    setWishlistItems(prev => {
+      const existing = prev.find(item => item.id === product.id);
+      if (existing) {
+        return prev.filter(item => item.id !== product.id);
+      }
+      return [...prev, product];
+    });
+  };
  
   const cartCount = cartItems.reduce((sum, item) => sum + item.qty, 0);
+  const wishlistCount = wishlistItems.length;
  
   const currentCategory = page.startsWith("category:") ? page.split(":")[1] : null;
   const isProductPage = page.startsWith("product:");
@@ -87,7 +100,7 @@ function AppInner() {
     <>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
       <style>{S}</style>
-      <Header page={page} setPage={setPage} megamenu={megamenu} sidebarCategories={sidebarCategories} cartCount={cartCount} />
+      <Header page={page} setPage={setPage} megamenu={megamenu} sidebarCategories={sidebarCategories} cartCount={cartCount} wishlistCount={wishlistCount} />
       <main>
         {page === "home" && (
           <HomePage
@@ -98,6 +111,8 @@ function AppInner() {
             footerCols={footerCols}
             setPage={setPage}
             onAddToCart={handleAddToCart}
+            wishlistItems={wishlistItems}
+            onToggleWishlist={handleToggleWishlist}
           />
         )}
         {page === "register" && (
@@ -112,6 +127,16 @@ function AppInner() {
             setPage={setPage}
           />
         )}
+        {page === "wishlist" && (
+          <WishlistPage
+            wishlistItems={wishlistItems}
+            onToggleWishlist={handleToggleWishlist}
+            promises={prefooterPromises}
+            footerCols={footerCols}
+            setPage={setPage}
+            onAddToCart={handleAddToCart}
+          />
+        )}
         {currentCategory && (
           <CategoryPage
             category={currentCategory}
@@ -119,6 +144,8 @@ function AppInner() {
             footerCols={footerCols}
             onAddToCart={handleAddToCart}
             setPage={setPage}
+            wishlistItems={wishlistItems}
+            onToggleWishlist={handleToggleWishlist}
           />
         )}
         {isProductPage && (
@@ -129,6 +156,8 @@ function AppInner() {
             setPage={setPage}
             promises={prefooterPromises}
             footerCols={footerCols}
+            wishlistItems={wishlistItems}
+            onToggleWishlist={handleToggleWishlist}
           />
         )}
       </main>

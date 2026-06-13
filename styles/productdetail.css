@@ -210,19 +210,17 @@
 .pdpColorBtn {
   padding: 6px 14px;
   border: 1px solid var(--border);
-  background: none;
   font-size: 12px;
   cursor: pointer;
   transition: border-color 0.15s, background 0.15s;
 }
 
 .pdpColorBtn:hover {
-  border-color: var(--dark);
+  transform: scale(1.05);
 }
 
 .pdpColorBtn.active {
-  border: 2px solid var(--dark);
-  background: var(--light);
+  background: var(--red);  
   font-weight: 600;
 }
 
@@ -238,7 +236,6 @@
   width: 48px;
   height: 48px;
   border: 1px solid var(--border);
-  background: none;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
@@ -249,11 +246,11 @@
 }
 
 .pdpSizeBtn:hover {
-  border-color: var(--dark);
+  transform: scale(1.05);
 }
 
 .pdpSizeBtn.active {
-  background: var(--dark);
+  background: var(--red);
   color: #fff;
   border-color: var(--dark);
 }

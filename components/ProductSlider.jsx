@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { useI18n } from "../src/i18n/i18ncontext";
 
-export default function ProductSlider({ clothes, shoes, onAddToCart }) {
+export default function ProductSlider({ clothes, shoes, onAddToCart, wishlistItems, onToggleWishlist }) {
   const { t } = useI18n();
   const [category, setCategory] = useState("clothes");
   const [activeSlide, setActiveSlide] = useState(0);
@@ -73,21 +73,37 @@ export default function ProductSlider({ clothes, shoes, onAddToCart }) {
           <FontAwesomeIcon icon={faChevronRight} onClick={next} className={`controlBtn`}/>
         </div>
         <div className="sliderTrack" style={{ transform: `translateX(${offset}%)` }}>
-          {items.map((item) => (
-            <div className="slideCard" key={item.title} style={{ flex: `0 0 ${100 / visible}%` }}>
-              <div className="slideInner">
-                <FontAwesomeIcon icon={faHeart} className="wishlistBtn" />
-                <img src={item.src} alt={item.title} />
-                <div className="slideInfo">
-                  <span className="slideTitle">{item.title}</span>
-                  {item.price && (
-                    <span className="slidePrice">€{item.price.toFixed(2)}</span>
-                  )}
-                  {/* <span className="slidePrice">${item.price}</span> */}
-                  
-                  <div className="colorSelector">
-                    <label>Color:</label>
-                    <div className="colorOptions"> 
+          {items.map((item) => {
+            const sliderItemId = `slider-${category}-${item.title.toLowerCase().replace(/\s+/g, "-")}`;
+            const isWishlisted = wishlistItems && wishlistItems.some(wItem => wItem.id === sliderItemId);
+            return (
+              <div className="slideCard" key={item.title} style={{ flex: `0 0 ${100 / visible}%` }}>
+                <div className="slideInner">
+                  <button 
+                    className={`wishlistBtn${isWishlisted ? " active" : ""}`}
+                    onClick={() => onToggleWishlist && onToggleWishlist({
+                      id: sliderItemId,
+                      title: item.title,
+                      price: item.price,
+                      src: item.src,
+                      brand: category,
+                      colors: item.colors,
+                      sizes: item.sizes
+                    })}
+                  >
+                    <FontAwesomeIcon icon={faHeart} />
+                  </button>
+                  <img src={item.src} alt={item.title} />
+                  <div className="slideInfo">
+                    <span className="slideTitle">{item.title}</span>
+                    {item.price && (
+                      <span className="slidePrice">€{item.price.toFixed(2)}</span>
+                    )}
+                    {/* <span className="slidePrice">${item.price}</span> */}
+                    
+                    <div className="colorSelector">
+                      <label>Color:</label>
+                      <div className="colorOptions"> 
                       {item.colors.map(color => (
                         <button
                           key={color}
@@ -121,7 +137,8 @@ export default function ProductSlider({ clothes, shoes, onAddToCart }) {
                 </button>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
         <div className="sliderWrapper">
           <button

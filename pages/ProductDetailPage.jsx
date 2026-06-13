@@ -89,7 +89,7 @@ function RelatedCard({ product, onNavigate, onAddToCart, t }) {
 
 // ─── MAIN COMPONENT ───────────────────────────────────────────────────────────
 
-export default function ProductDetailPage({ productId, category, onAddToCart, setPage, promises, footerCols }) {
+export default function ProductDetailPage({ productId, category, onAddToCart, setPage, promises, footerCols, wishlistItems, onToggleWishlist }) {
   const { t } = useI18n();
 
   const products = allProducts[category] || [];
@@ -99,7 +99,6 @@ export default function ProductDetailPage({ productId, category, onAddToCart, se
   const [selectedColor, setSelectedColor] = useState(product?.colors?.[0] || null);
   const [selectedSize, setSelectedSize] = useState(null);
   const [qty, setQty] = useState(1);
-  const [wishlisted, setWishlisted] = useState(false);
   const [sizeError, setSizeError] = useState(false);
   const [toastVisible, setToastVisible] = useState(false);
   const [activeImg, setActiveImg] = useState(0);
@@ -273,8 +272,8 @@ export default function ProductDetailPage({ productId, category, onAddToCart, se
               {t.product.addToCart}
             </button>
             <button
-              className={`pdpWishlistBtn${wishlisted ? " active" : ""}`}
-              onClick={() => setWishlisted(w => !w)}
+              className={`pdpWishlistBtn${wishlistItems && wishlistItems.some(item => item.id === product.id) ? " active" : ""}`}
+              onClick={() => onToggleWishlist(product)}
               title={t.header.wishlist}
             >
               <FontAwesomeIcon icon={faHeart} />

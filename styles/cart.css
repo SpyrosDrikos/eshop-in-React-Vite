@@ -69,14 +69,16 @@
 .quantityControl {
   display: flex;
   align-items: center;
-  border: 1px solid var(--border);
+  width: 100px;
 }
 
 .quantityControl button {
-  background: none;
   border: none;
+  color: var(--dark);
+  background: none;
   width: 28px;
   height: 28px;
+  padding: 0;
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
@@ -84,10 +86,15 @@
 
 .quantityControl input {
   width: 40px;
+  height: 22px;
+  border-radius: 6px;
   text-align: center;
+  background: var(--light);
+  color: var(--dark);
   border: none;
   outline: none;
   font-size: 13px;
+  font-weight: 600;
 }
 
 .removeBtn {

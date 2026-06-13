@@ -33,8 +33,7 @@ function FilterSection({ title, children, defaultOpen = true }) {
   );
 }
 
-function ProductCard({ product, onAddToCart, t, onNavigate }) {
-  const [wishlisted, setWishlisted] = useState(false);
+function ProductCard({ product, onAddToCart, t, onNavigate, isWishlisted, onToggleWishlist }) {
   const discount = product.originalPrice
     ? Math.round((1 - product.price / product.originalPrice) * 100)
     : null;
@@ -48,8 +47,8 @@ function ProductCard({ product, onAddToCart, t, onNavigate }) {
           {product.isSale && discount && <span className="badge badgeSale">-{discount}%</span>}
         </div>
         <button
-          className={`catWishlistBtn${wishlisted ? " active" : ""}`}
-          onClick={e => { e.stopPropagation(); setWishlisted(w => !w); }}
+          className={`catWishlistBtn${isWishlisted ? " active" : ""}`}
+          onClick={e => { e.stopPropagation(); onToggleWishlist(product); }}
           title={t.header.wishlist}
         >
           <FontAwesomeIcon icon={faHeart} />
@@ -74,9 +73,9 @@ function ProductCard({ product, onAddToCart, t, onNavigate }) {
       </div>
     </div>
   );
-}
+} 
 
-export default function CategoryPage({ category, promises, footerCols, onAddToCart, setPage }) {
+export default function CategoryPage({ category, promises, footerCols, onAddToCart, setPage, wishlistItems, onToggleWishlist }) {
   const { t } = useI18n();
   const products = allProducts[category] || [];
   const meta = categoryMeta[category] || { label: category.toUpperCase() };
@@ -234,7 +233,7 @@ export default function CategoryPage({ category, promises, footerCols, onAddToCa
         <img src={meta.img} alt={meta.label} />
         <div className="catHeroOverlay">
           <h1>{meta.label}</h1>
-          <p>{filtered.length} {t.filters.showResults.toLowerCase()}</p>
+          <p>Choose which style you like</p>
         </div>
       </div>
 
@@ -338,6 +337,8 @@ export default function CategoryPage({ category, promises, footerCols, onAddToCa
                     onAddToCart={onAddToCart}
                     onNavigate={navigateToProduct}
                     t={t}
+                    isWishlisted={wishlistItems && wishlistItems.some(item => item.id === product.id)}
+                    onToggleWishlist={onToggleWishlist}
                   />
                 ))}
               </div>

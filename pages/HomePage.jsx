@@ -20,7 +20,7 @@ function Hero() {
   );
 }
 
-export default function HomePage({ clothes, shoes, hotCategories, promises, footerCols, setPage, onAddToCart }) {
+export default function HomePage({ clothes, shoes, hotCategories, promises, footerCols, setPage, onAddToCart, wishlistItems, onToggleWishlist }) {
   return (
     <>
       <Hero setPage={setPage}/>
@@ -31,7 +31,7 @@ export default function HomePage({ clothes, shoes, hotCategories, promises, foot
         buttonLink="#"
         image="https://images.unsplash.com/photo-1515222134207-3a0f31f9eeac?w=1200&q=80"
       />
-      <ProductSlider clothes={clothes} shoes={shoes} onAddToCart={onAddToCart} />
+      <ProductSlider clothes={clothes} shoes={shoes} onAddToCart={onAddToCart} wishlistItems={wishlistItems} onToggleWishlist={onToggleWishlist} />
       <HotCategories categories={hotCategories} setPage={setPage} />
       <PreFooter promises={promises} footerCols={footerCols} />
     </>

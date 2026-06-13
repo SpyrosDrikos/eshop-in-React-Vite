@@ -131,7 +131,7 @@ main {
 /* ─── MEGAMENU NAV ───────────────────────────────────────────────────────────── */
 .megamenuNav {
   display: flex;
-  gap: 20px;
+  gap: 50px;
   align-items: center;
   font-size: 13px;
   font-weight: 500;
@@ -157,6 +157,11 @@ main {
 .megaItem {
   position: relative;
   padding: 18px 0;
+  transition: 0.2s all ease;
+}
+
+.megaItem:hover {
+  text-shadow: 0 2px 4px rgba(0,0,0,0.7);
 }
 
 .megaItem:hover .megadrop {
@@ -181,6 +186,7 @@ main {
   width: fit-content;
   gap: 32px;
   z-index: 200;
+  text-shadow: none;
 }
 
 .megaCol {

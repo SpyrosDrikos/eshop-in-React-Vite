@@ -161,7 +161,7 @@ function MegaNav({ megamenu, setPage }) {
 }
 
 // ─── HEADER ───────────────────────────────────────────────────────────────────
-export default function Header({ page, setPage, megamenu, sidebarCategories, cartCount = 0 }) {
+export default function Header({ page, setPage, megamenu, sidebarCategories, cartCount = 0, wishlistCount = 0 }) {
   const { t } = useI18n();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -201,7 +201,10 @@ export default function Header({ page, setPage, megamenu, sidebarCategories, car
           <LanguageSwitcher />
           <FontAwesomeIcon icon={faSearch} className="iconBtn" onClick={() => setSearchOpen(!searchOpen)} title={t.header.search} />
           <FontAwesomeIcon icon={faUser} className="iconBtn" onClick={() => setPage("register")} title={t.header.account} />
-          <FontAwesomeIcon icon={faHeart} className="iconBtn" title={t.header.wishlist} />
+          <button className="iconBtn cartIconBtn" onClick={() => setPage("wishlist")} title={t.header.wishlist}>
+            <FontAwesomeIcon icon={faHeart} />
+            {wishlistCount > 0 && <span className="cartBadge">{wishlistCount > 99 ? "99+" : wishlistCount}</span>}
+          </button>
           <button className="iconBtn cartIconBtn" onClick={() => setPage("cart")} title={t.header.cart}>
             <FontAwesomeIcon icon={faShoppingCart} />
             {cartCount > 0 && <span className="cartBadge">{cartCount > 99 ? "99+" : cartCount}</span>}
